@@ -1,0 +1,35 @@
+min_os_version: 1.3.8
+name: Linux Command Library
+package: community.lazycat.app.linuxcommandlibrary
+version: 0.1.3
+description: "一个现代、高性能的Linux 命令参考服务，使用 Rust 构建，并受原始 Kotlin 项目Linux Command Library启发"
+homepage: https://github.com/dockers-x/LinuxCommandLibrary
+author: czyt
+application:
+  subdomain: linuxcommandlibrary
+  background_task: true
+  public_path:
+    - /
+
+  upstreams:
+    - location: /
+      backend: http://linuxcommandlibrary:8080/
+
+services:
+  linuxcommandlibrary:
+    # czyt/linux-command-library:v0.1.3
+    image: registry.lazycat.cloud/czyt/czyt/linux-command-library:918795fd40b46164
+    container_name: linuxcommandlibrary
+    environment:
+      - DATABASE_PATH=/app/database.db
+      - SERVER_ADDR=0.0.0.0:8080
+      - ENABLE_CORS=true
+      - RUST_LOG=info
+
+locales:
+  zh:
+    name: "Linux Command Library"
+    description: "一个现代、高性能的Linux 命令参考服务，使用 Rust 构建，并受原始 Kotlin 项目Linux Command Library启发"
+  en:
+    name: "Linux Command Library"
+    description: "A modern, high-performance web API server for Linux command reference, built with Rust and inspired by the original Kotlin project "
