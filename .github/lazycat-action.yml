@@ -1,0 +1,37 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/linuxcommandlibrary.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: linuxcommandlibrary
+build:
+  run_buildscript: false
+images:
+  - id: linuxcommandlibrary
+    target: service
+    service: linuxcommandlibrary
+    source: czyt/linux-command-library
+    channel: stable
+    sort: semver
+    tag_regex: '^v\d+\.\d+\.\d+$'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    changelog_locales: [zh, en]
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: Linux Command Library
+    summary: "一个现代、高性能的Linux 命令参考服务，使用 Rust 构建，并受原始 Kotlin 项目Linux Command Library启发"
