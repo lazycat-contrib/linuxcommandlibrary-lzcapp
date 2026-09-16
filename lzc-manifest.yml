@@ -6,11 +6,10 @@ application:
   upstreams:
     - location: /
       backend: http://linuxcommandlibrary:8080/
-
 services:
   linuxcommandlibrary:
     # upstream: czyt/linux-command-library:v0.1.3
-    image: czyt/linux-command-library:v0.1.3
+    image: registry.lazycat.cloud/czyt/czyt/linux-command-library:918795fd40b46164
     environment:
       - DATABASE_PATH=/app/database.db
       - SERVER_ADDR=0.0.0.0:8080
